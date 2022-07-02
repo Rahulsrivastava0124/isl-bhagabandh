@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Anek+Latin:wght@500;&display=swap");
+
+.school_name {
+  padding-left: 5px;
+  font-size: xx-large;
+}
+.carousel-inner {
+  height: 400px;
+  width: 1152px;
+}
+.left_carsousel {
+  left: 160px !important;
+}
+.right_carsousel {
+  right: 160px !important;
+}
+body {
+  background-color: #eeeeee;
+  font-family: "Anek Latin", sans-serif;
+}
+.card_image_home {
+  height: 100%;
+}
+.Desk_card_color {
+  background-color: #f0e3ca;
+ 
+}
+.box_shodaw{
+    -webkit-box-shadow: 6px 4px 19px -7px rgb(42, 40, 40);
+    -moz-box-shadow: 6px 4px 19px -7px rgba(0, 0, 0, 1);
+    box-shadow: 6px 4px 15px -9px rgb(65, 64, 64);
+}
