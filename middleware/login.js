@@ -6,7 +6,7 @@ function validation(req, res, next) {
     const verify = token.verify(validation_token, "jwtkey");
     console.log(verify);
   } catch (error) {
-    res.send(error);
+    res.redirect("/login");
   }
   next();
 }

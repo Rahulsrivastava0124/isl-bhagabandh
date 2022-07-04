@@ -13,6 +13,8 @@ jwtkey = "islbhagabandh";
 const middleware = require("./middleware/login");
 const Contact = require("./Schema/Contact");
 const Register = require("./Schema/Register");
+const { render } = require("express/lib/response");
+const internal = require("stream");
 const app = express();
 const port = 3000;
 // connect mongoose
@@ -74,6 +76,19 @@ app.post("/", json_parser, encoded, (req, res) => {
   ContactUs.save();
   res.render("Home");
 });
+app.post("/ISL/Query/:_id", encoded, (req, res) => {
+  console.log(req.params._id);
+  Contact.deleteOne({ _id: req.params._id }).then((data) => {
+    console.log(data.acknowledged);
+    if (data.acknowledged == true) {
+      res.cookie("states","true",{maxAge:2000});
+    } else {
+      res.cookie("states","false");
+    }
+
+    res.redirect("/ISL");
+  });
+});
 app.get("/Admission_info", async (req, res) => {
   res.render("Admission_info");
 });
@@ -92,9 +107,11 @@ app.post("/Login", encoded, async (req, res) => {
 
   res.redirect("/ISL");
 });
-app.get("/ISL", encoded, middleware.validation, async (req, res) => {
+app.get("/ISL", encoded, middleware.validation, async (req, res,next) => {
   await Contact.find().then((data) => {
-    res.render("ISL", { data: data });
+
+      res.render("ISL", { data: data,states:req.cookies.states });
+
   });
 });
 app.get("/About", async (req, res) => {
