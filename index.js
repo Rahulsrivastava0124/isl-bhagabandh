@@ -4,8 +4,9 @@ const json_parser = bodyParser.json();
 const encoded = bodyParser.urlencoded({ extended: false });
 const mongoose = require("mongoose");
 const Crypto = require("crypto");
+const Multer = require("multer");
+const User_Data = require("./Schema/New_admission");
 const cookie_parser = require("cookie-parser");
-
 var key = "password";
 var algo = "aes256";
 const Token = require("jsonwebtoken");
@@ -29,6 +30,16 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+const Storage = Multer.diskStorage({
+  destination: "uploads",
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+const upload = Multer({
+  storage: Storage,
+}).single("image");
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/Public"));
@@ -81,9 +92,9 @@ app.post("/ISL/Query/:_id", encoded, (req, res) => {
   Contact.deleteOne({ _id: req.params._id }).then((data) => {
     console.log(data.acknowledged);
     if (data.acknowledged == true) {
-      res.cookie("states","true",{maxAge:2000});
+      res.cookie("states", "true", { maxAge: 2000 });
     } else {
-      res.cookie("states","false");
+      res.cookie("states", "false");
     }
 
     res.redirect("/ISL");
@@ -107,11 +118,9 @@ app.post("/Login", encoded, async (req, res) => {
 
   res.redirect("/ISL");
 });
-app.get("/ISL", encoded, middleware.validation, async (req, res,next) => {
+app.get("/ISL", encoded, middleware.validation, async (req, res, next) => {
   await Contact.find().then((data) => {
-
-      res.render("ISL", { data: data,states:req.cookies.states });
-
+    res.render("ISL", { data: data, states: req.cookies.states });
   });
 });
 app.get("/About", async (req, res) => {
@@ -125,6 +134,45 @@ app.get("/Student", async (req, res) => {
 });
 app.get("/Facilities", async (req, res) => {
   res.render("Facilities");
+});
+app.get("/new_admission", (req, res) => {
+  res.render("new_admission");
+});
+app.post("/new_admission", encoded, (req, res) => {
+  const userdata = {
+    user_data: [
+      {
+        First_name: req.body.First_name,
+        Lastname: req.body.Last_name,
+        class: req.body.class,
+        date: req.body.date,
+        Guardian_name: req.body.Guardian_name,
+        Address: req.body.Address,
+        Address2: req.body.Address2,
+        City: req.body.City,
+        State: req.body.State,
+        Zip_code: req.body.Zip_code,
+        Phone: req.body.Phone,
+        email: req.body.email,
+      },
+    ],
+  };
+  upload(req, res, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      var User = new User_Data(userdata);
+      User.save()
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
+  console.log(req.body.image);
+  res.render("submitNewadmission",{new_admission_data:userdata});
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

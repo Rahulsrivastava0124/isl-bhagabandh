@@ -1,0 +1,80 @@
+<%- include("./Nav")-%>
+    <h1 class="text-center m-3">New Admission Form</h1>
+    <div class="container w-50">
+        <form action="/new_admission" method="post" enctype="multipart/form-data">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="First_name" required>
+                <label for="exampleFormControlInput1">Student's First Name</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="Last_name" required>
+                <label for="exampleFormControlTextarea1">Student's Last Name</label>
+            </div>
+            <div class="d-flex">
+                <label for="exampleFormControlTextarea1" class="p-3">Gender</label>
+                <div class="form-check p-3">
+                    <input class="form-check-input" type="radio" name="Check" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Male
+                    </label>
+                </div>
+                <div class="form-check p-3">
+                    <input class="form-check-input" type="radio" name="Check1" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Female
+                    </label>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" name="class" required pattern=".{1,2,3,4,5,6,7,8,9,10}">
+                <label for="exampleFormControlTextarea1">Class You Want To Apply For</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="date" class="form-control" id="floatingInput" name="date" required>
+                <label for="exampleFormControlTextarea1">Student's Birth Date</label>
+            </div>
+            <div class="form-floating mb-3">
+
+                <input type="text" class="form-control" id="floatingInput" name="Guardian_name" required>
+                <label for="exampleFormControlTextarea1">Parent/Guardian Name</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="Address" required>
+                <label for="exampleFormControlTextarea1">Postal Address</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="Address2" required>
+                <label for="exampleFormControlTextarea1">Postal Address 2</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="City" required>
+                <label for="exampleFormControlTextarea1">City</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="State" required>
+                <label for="exampleFormControlTextarea1">State</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" name="Zip_code" required>
+                <label for="floatingInput">Postal/Zip Code</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" name="Phone" required>
+                <label for="floatingInput">Phone No.</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" name="email" required>
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" id="image" name="image">
+              </div>
+            <button class="btn btn-primary" type="submit">submit</button>
+        </form>
+    </div>
+
+
+    </div>
+
+    <%- include("./footer")-%>
