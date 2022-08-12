@@ -30,11 +30,11 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
+const uniqe = Date.now();
 const Storage = Multer.diskStorage({
   destination: "uploads",
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
+    cb(null, file.fieldname + "-" + uniqe + ".jpg");
   },
 });
 const upload = Multer({
@@ -104,7 +104,13 @@ app.get("/Admission_info", async (req, res) => {
   res.render("Admission_info");
 });
 app.get("/Login", async (req, res) => {
-  res.render("Login_Desk");
+ 
+  if (req.cookies.Token == null) {
+    res.render("Login_Desk");
+  } else req.cookies.Token == req.cookies.Token;
+  {
+    res.redirect("/ISL");
+  }
 });
 app.post("/Login", encoded, async (req, res) => {
   await Register.findOne({ Email: req.body.Email }).then((data) => {
@@ -138,14 +144,21 @@ app.get("/Facilities", async (req, res) => {
 app.get("/new_admission", (req, res) => {
   res.render("new_admission");
 });
-app.post("/new_admission", encoded, (req, res) => {
-  const userdata = {
+app.post("/new_admission", encoded, upload, (req, res) => {
+  var n = Math.floor(Math.random() * 1000000000);
+  var User = new User_Data({
     user_data: [
       {
         First_name: req.body.First_name,
         Lastname: req.body.Last_name,
+        Gender: {
+          male: req.body.Check,
+          Female: req.body.Check1,
+        },
         class: req.body.class,
         date: req.body.date,
+        Father_name: req.body.Father_name,
+        Mother_name: req.body.Mother_name,
         Guardian_name: req.body.Guardian_name,
         Address: req.body.Address,
         Address2: req.body.Address2,
@@ -154,25 +167,26 @@ app.post("/new_admission", encoded, (req, res) => {
         Zip_code: req.body.Zip_code,
         Phone: req.body.Phone,
         email: req.body.email,
+        image: `image-${uniqe}`,
+        Application_no: n,
       },
     ],
-  };
-  upload(req, res, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      var User = new User_Data(userdata);
-      User.save()
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
   });
+  User.save()
+    .then((data) => {
+      console.log(data);
+      res.render("submitNewadmission", { data: data });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   console.log(req.body.image);
-  res.render("submitNewadmission",{new_admission_data:userdata});
 });
 
+// delete item
+app.get("/submitNewadmission", (req, res) => {
+  var n = Math.floor(Math.random() * 1000000000);
+  console.log(n);
+  res.render("submitNewadmission");
+});
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
