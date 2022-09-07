@@ -1,8 +1,134 @@
-<%- include("./Nav")-%> 
-<div class="text-center">
-<h1>INDIAN SCHOOL OF LEARNING (BHAGABANDH)</h1>
-<h3>New Addmission</h3>
+<%- include("./Nav")-%>
+    <div class="container border border-dark my-3">
+        <div class="d-flex flex-row text-center">
+            <img src="isl_logo.jpg" alt="" height="100px" width="70px" class="my-2">
+            <p class=" display-5">INDIAN SCHOOL OF LEARNING (BHAGABANDH)</p>
+        </div>
+        <div class=" d-flex flex-row justify-content-between">
+            <h3>
+                Your application number:<strong>
+                    <%=data.user_data[0].Application_no%>
+                </strong>
+            </h3>
+            <div class="d-flex flex-column">
+                <img src="<%=data.user_data[0].image%>.jpg" class="rounded new_admission_image img-thumbnail">
+                <img src="<%=data.user_data[0].image1%>.jpg" class="rounded new_admission_image1 img-thumbnail">
 
-</div>
+            </div>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>Name:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].First_name %>
+                        <%= data.user_data[0].Lastname %>
+                </strong>
+            </h3>
+        </div>
+        <div class=" d-flex flex-row mb-200121">
+            <h3>Gender:</h3>
+            <% if (data.user_data[0].Gender.male=="on" ) { %>
+                <h3 class=""><strong>Male</strong></h3>
+                <% } else { %>
+                    <h3 class=""><strong>Female</strong></h3>
+                    <% } %>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>Class:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].class %>
+                </strong>
+            </h3>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>Date:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].date %>
+                </strong>
+            </h3>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>Father Name:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].Father_name %>
+                </strong>
+            </h3>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>Mother Name:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].Mother_name %>
+                </strong>
+            </h3>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>Guardian Name:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].Guardian_name %>
+                </strong>
+            </h3>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>Postal Address 1:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].Address %>
+                </strong>
+            </h3>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>Postal Address 2:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].Address2 %>
+                </strong>
+            </h3>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>City:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].City %>
+                </strong>
+            </h3>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>State:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].State %>
+                </strong>
+            </h3>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>Postal Zip Code:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].Zip_code %>
+                </strong>
+            </h3>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>Phone Number:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].Phone %>
+                </strong>
+            </h3>
+        </div>
+        <div class="d-flex flex-row mb-200121">
+            <h3>Email:</h3>
+            <h3 class="">
+                <strong>
+                    <%= data.user_data[0].email %>
+                </strong>
+            </h3>
+        </div>
+    </div>
 
-<%- include("./footer")-%> 
+    <%- include("./footer")-%>

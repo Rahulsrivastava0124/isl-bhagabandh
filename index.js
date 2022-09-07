@@ -39,10 +39,12 @@ const Storage = Multer.diskStorage({
 });
 const upload = Multer({
   storage: Storage,
-}).single("image");
+}).fields([{name:"image",maxCount:1},{name:'image1',maxCount:1}]);
+
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/Public"));
+app.use(express.static(__dirname + "/uploads"));
 app.use(cookie_parser());
 
 app.get("/", (req, res) => res.render("Home"));
@@ -53,17 +55,22 @@ app.post("/Register", encoded, (req, res) => {
   var cipher = Crypto.createCipher(algo, key);
   var password_encoded =
     cipher.update(req.body.Password, "utf-8", "hex") + cipher.final("hex");
+  register_id = Math.floor(Math.random() * 1000000000);
+  const Login_Token = Token.sign(
+    { _id: register_id, Email: req.body.Email, password: password_encoded },
+    "jwtkey"
+  );
+
   const register = new Register({
-    _id: mongoose.Types.ObjectId(),
+    _id: mongoose.Types.ObjectId(register_id),
     Email: req.body.Email,
     Password: password_encoded,
+    Token: Login_Token,
   });
   if (req.body.Password == req.body.Confirm_Password) {
     register
       .save()
-      .then((data) => {
-        console.log(data);
-      })
+      .then((data) => {})
       .catch((err) => {
         console.log(err);
       });
@@ -96,22 +103,24 @@ app.post("/ISL/Query/:_id", encoded, (req, res) => {
     } else {
       res.cookie("states", "false");
     }
-
     res.redirect("/ISL");
   });
 });
 app.get("/Admission_info", async (req, res) => {
   res.render("Admission_info");
 });
-app.get("/Login", async (req, res) => {
- 
-  if (req.cookies.Token == null) {
+app.get("/Login", encoded, async (req, res, next) => {
+  if (req.cookies.Token == undefined) {
     res.render("Login_Desk");
-  } else req.cookies.Token == req.cookies.Token;
-  {
+  } else {
     res.redirect("/ISL");
   }
 });
+app.get("/logout", (req, res) => {
+  res.clearCookie("Token");
+  res.redirect("/");
+});
+
 app.post("/Login", encoded, async (req, res) => {
   await Register.findOne({ Email: req.body.Email }).then((data) => {
     var dechiper = Crypto.createDecipher(algo, key);
@@ -119,7 +128,7 @@ app.post("/Login", encoded, async (req, res) => {
       dechiper.update(`${data.Password}`, "hex", "utf-8") +
       dechiper.final("utf-8");
     const Login_Token = Token.sign({ data }, "jwtkey");
-    res.cookie("Token", Login_Token, { expire: 400000 + Date.now() });
+    res.cookie("Token", Login_Token, { expire: 400 + Date.now() });
   });
 
   res.redirect("/ISL");
@@ -157,6 +166,8 @@ app.post("/new_admission", encoded, upload, (req, res) => {
         },
         class: req.body.class,
         date: req.body.date,
+        Adhaar_number: req.body.Adhaar_number,
+        //Adhaar_image:`Adhaar-${uniqe}`,
         Father_name: req.body.Father_name,
         Mother_name: req.body.Mother_name,
         Guardian_name: req.body.Guardian_name,
@@ -168,6 +179,7 @@ app.post("/new_admission", encoded, upload, (req, res) => {
         Phone: req.body.Phone,
         email: req.body.email,
         image: `image-${uniqe}`,
+        image1:`image1-${uniqe}`,
         Application_no: n,
       },
     ],
@@ -180,13 +192,11 @@ app.post("/new_admission", encoded, upload, (req, res) => {
     .catch((err) => {
       console.log(err);
     });
-  console.log(req.body.image);
 });
 
 // delete item
 app.get("/submitNewadmission", (req, res) => {
   var n = Math.floor(Math.random() * 1000000000);
-  console.log(n);
   res.render("submitNewadmission");
 });
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

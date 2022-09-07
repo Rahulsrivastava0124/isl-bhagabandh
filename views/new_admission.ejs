@@ -35,6 +35,10 @@
                 <label for="exampleFormControlTextarea1">Student's Birth Date</label>
             </div>
             <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" name="Adhaar_number" required>
+                <label for="exampleFormControlTextarea1">Adhaar Number</label>
+            </div>
+            <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingInput" name="Father_name" required>
                 <label for="exampleFormControlTextarea1">Father Name</label>
             </div>
@@ -75,8 +79,12 @@
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="mb-3">
-                <label for="formFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" id="image" name="image">
+                <label for="formFile" class="form-label">Student image</label>
+                <input class="form-control" type="file" id="image" name="image" required>
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Student image</label>
+                <input class="form-control" type="file" id="image1" name="image1" required>
             </div>
             <button class="btn btn-primary" type="submit">submit</button>
         </form>
