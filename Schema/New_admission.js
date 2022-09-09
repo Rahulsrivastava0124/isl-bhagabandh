@@ -8,8 +8,13 @@ const new_admissionSchema = new mongoose.Schema({
         male:String,
         Female:String
       },
+      Previes_value:{
+        Previes_yes:String,
+        Previes_no:String
+      },
       class: Number,
       date: Date,
+      Age:Number,
       Adhaar_number:Number,
       // Adhaar_image:String,
       Father_name: String,
@@ -26,6 +31,9 @@ const new_admissionSchema = new mongoose.Schema({
       image1: String,
       Sign_image:String,
       Application_no:Number,
+      Form:Number,
+      Previes_School_Name:String,
+      Previes_School_Class:Number,
     },
   ],
 });

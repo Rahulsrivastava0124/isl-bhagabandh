@@ -16,6 +16,7 @@ const Contact = require("./Schema/Contact");
 const Register = require("./Schema/Register");
 const { render } = require("express/lib/response");
 const internal = require("stream");
+
 const app = express();
 const port = 3000;
 // connect mongoose
@@ -39,8 +40,10 @@ const Storage = Multer.diskStorage({
 });
 const upload = Multer({
   storage: Storage,
-}).fields([{name:"image",maxCount:1},{name:'image1',maxCount:1}]);
-
+}).fields([
+  { name: "image", maxCount: 1 },
+  { name: "image1", maxCount: 1 },
+]);
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/Public"));
@@ -155,6 +158,7 @@ app.get("/new_admission", (req, res) => {
 });
 app.post("/new_admission", encoded, upload, (req, res) => {
   var n = Math.floor(Math.random() * 1000000000);
+  var Form_number = Math.floor(Math.random() * 1234);
   var User = new User_Data({
     user_data: [
       {
@@ -166,6 +170,7 @@ app.post("/new_admission", encoded, upload, (req, res) => {
         },
         class: req.body.class,
         date: req.body.date,
+        Age: req.body.Age,
         Adhaar_number: req.body.Adhaar_number,
         //Adhaar_image:`Adhaar-${uniqe}`,
         Father_name: req.body.Father_name,
@@ -179,8 +184,15 @@ app.post("/new_admission", encoded, upload, (req, res) => {
         Phone: req.body.Phone,
         email: req.body.email,
         image: `image-${uniqe}`,
-        image1:`image1-${uniqe}`,
+        image1: `image1-${uniqe}`,
         Application_no: n,
+        Form: Form_number,
+        Previes_School_Name:req.body.previes_School,
+        Previes_School_Class:req.body.previes_Class,
+        Previes_value:{
+          Previes_yes:req.body.flexRadioDefault,
+          Previes_no:req.body.flexRadioDefault,
+        }
       },
     ],
   });
@@ -199,4 +211,11 @@ app.get("/submitNewadmission", (req, res) => {
   var n = Math.floor(Math.random() * 1000000000);
   res.render("submitNewadmission");
 });
+
+//Edit submit new application data
+app.get("/Edit_submit_new_addmission", (req, res) => {
+  res.render("Edit_submit_new_admission");
+});
+
+//define port and app listen
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

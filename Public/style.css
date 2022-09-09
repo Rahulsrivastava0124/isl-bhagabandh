@@ -23,22 +23,36 @@ body {
 }
 .Desk_card_color {
   background-color: #f0e3ca;
- 
 }
-.box_shodaw{
-    -webkit-box-shadow: 6px 4px 19px -7px rgb(42, 40, 40);
-    -moz-box-shadow: 6px 4px 19px -7px rgba(0, 0, 0, 1);
-    box-shadow: 6px 4px 15px -9px rgb(65, 64, 64);
+.box_shodaw {
+  -webkit-box-shadow: 6px 4px 19px -7px rgb(42, 40, 40);
+  -moz-box-shadow: 6px 4px 19px -7px rgba(0, 0, 0, 1);
+  box-shadow: 6px 4px 15px -9px rgb(65, 64, 64);
 }
-.Query{
+.Query {
   height: 407px;
 }
-.new_admission_image{
-  height:200px;
+.new_admission_image {
+  height: 200px;
   width: 150px;
 }
 
-.new_admission_image1{
-  height:50px;
+.new_admission_image1 {
+  height: 50px;
   width: 150px;
+}
+
+.submit_container {
+  margin: auto;
+  height: 1508px;
+  width: 1454px;
+  padding-left: 76px;
+  padding-right: 76px;
+  padding-top: 40px;
+}
+.css-border-spacing{
+  border-spacing: 10px;
+}
+.Hide{
+  display: none;
 }
