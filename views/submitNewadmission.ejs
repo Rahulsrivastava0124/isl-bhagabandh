@@ -1,13 +1,20 @@
 <%- include("./Nav")-%>
+<style>
+    td,th{
+        padding: 20px !important;
+        font-size: larger;
+    }
+</style>
     <div class="submit_container border border-dark my-3">
         <div class="d-flex flex-row text-center">
             <img src="isl_logo.jpg" alt="" height="100px" width="70px" class="my-2">
             <p class=" display-5">INDIAN SCHOOL OF LEARNING (BHAGABANDH)</p>
         </div>
-        <div class="table-responsive">
+        <h2 class="text-center"> New Admission</h2>
+        <div class="table-responsive mt-5">
             <table class="table table-bordered border-dark css-border-spacing">
                     <tr>
-                        <th colspan="3" class="text-center">
+                        <th colspan="3" class="text-center fs-4">
                             Current School detial
                         </th>
                     </tr>
@@ -158,7 +165,7 @@
                 </tr>
                 <% if (data.user_data[0].Previes_value.Previes_yes) { %>
                     <tr>
-                        <th colspan="3" class="text-center">
+                        <th colspan="3" class="text-center fs-4">
                             Previes School Information
                         </th>
                     </tr>
@@ -171,7 +178,11 @@
                         </td>
                     </tr>
                     <% } else { %>
-
+<tr>
+    <td>
+        No previes data ...
+    </td>
+</tr>
                         <% } %>
             </table>
         </div>

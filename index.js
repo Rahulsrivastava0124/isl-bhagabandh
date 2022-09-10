@@ -18,7 +18,7 @@ const { render } = require("express/lib/response");
 const internal = require("stream");
 
 const app = express();
-const port = 3000;
+const port = 3005;
 // connect mongoose
 mongoose
   .connect("mongodb://localhost:27017/contacts", {
@@ -125,16 +125,26 @@ app.get("/logout", (req, res) => {
 });
 
 app.post("/Login", encoded, async (req, res) => {
-  await Register.findOne({ Email: req.body.Email }).then((data) => {
-    var dechiper = Crypto.createDecipher(algo, key);
-    var password_encoded =
-      dechiper.update(`${data.Password}`, "hex", "utf-8") +
-      dechiper.final("utf-8");
-    const Login_Token = Token.sign({ data }, "jwtkey");
-    res.cookie("Token", Login_Token, { expire: 400 + Date.now() });
-  });
-
-  res.redirect("/ISL");
+  await Register.findOne({ Email: req.body.Email })
+    .then((data) => {
+      if (data === null) {
+        res.redirect("/Login");
+      } else {
+        let dechiper = Crypto.createDecipher(algo, key);
+        let password_encoded =
+          dechiper.update(`${data.Password}`, "hex", "utf-8") +
+          dechiper.final("utf-8");
+        console.log(password_encoded);
+        if (password_encoded == req.body.Password) {
+          const Login_Token = Token.sign({ data }, "jwtkey");
+          res.cookie("Token", Login_Token, { expire: 400 + Date.now() });
+          res.redirect("/ISL");
+        }
+      }
+    })
+    .catch((err) => {
+    res.render('/Login');
+    });
 });
 app.get("/ISL", encoded, middleware.validation, async (req, res, next) => {
   await Contact.find().then((data) => {
@@ -187,12 +197,12 @@ app.post("/new_admission", encoded, upload, (req, res) => {
         image1: `image1-${uniqe}`,
         Application_no: n,
         Form: Form_number,
-        Previes_School_Name:req.body.previes_School,
-        Previes_School_Class:req.body.previes_Class,
-        Previes_value:{
-          Previes_yes:req.body.flexRadioDefault,
-          Previes_no:req.body.flexRadioDefault,
-        }
+        Previes_School_Name: req.body.previes_School,
+        Previes_School_Class: req.body.previes_Class,
+        Previes_value: {
+          Previes_yes: req.body.flexRadioDefault,
+          Previes_no: req.body.flexRadioDefault,
+        },
       },
     ],
   });
