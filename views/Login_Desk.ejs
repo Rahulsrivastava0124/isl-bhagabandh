@@ -1,30 +1,74 @@
 <%- include("./Nav")-%>
-<div class="text-center container w-25 my-4 box_shodaw pt-4 rounded-3">
-    <main class="form-signin w-100 m-auto">
-        <form action="" method="post">
-            <img class="mb-4" src="/isl_logo.jpg" alt="" width="72" height="72">
-            <h1 class="h3 mb-3 fw-normal"><strong>Sign-in</strong></h1>
+    <style>
+        .Err_handl {
+            width: 300px;
+        }
+    </style>
+    <% if (Err_handling) { %>
+        <div class=" text-center alert alert-danger alert-dismissible fade show Err_handl position-absolute top-0 start-50 translate-middle-x"
+            role="alert">
+            <i class="bi bi-x-circle-fill"></i>
+            <strong>Error</strong>      Email Invalid
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
 
-            <div class="form-floating pb-2">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required name="Email">
-                <label for="floatingInput">Email address</label>
+        <div class="text-center container w-25 my-4 box_shodaw pt-4 rounded-3">
+
+            <main class="form-signin w-100 m-auto">
+                <form action="" method="post">
+                    <img class="mb-4" src="/isl_logo.jpg" alt="" width="72" height="72">
+                    <h1 class="h3 mb-3 fw-normal"><strong>Sign-in</strong></h1>
+
+                    <div class="form-floating pb-2">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                            required name="Email">
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating pb-2">
+                        <input type="password" class="form-control" id="floatingPassword" required
+                            placeholder="Password" name="Password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                    <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
+                </form>
+            </main>
+        </div>
+        <% } else { %>
+            <div class="text-center container w-25 my-4 box_shodaw pt-4 rounded-3">
+
+                <main class="form-signin w-100 m-auto">
+                    <form action="" method="post">
+                        <img class="mb-4" src="/isl_logo.jpg" alt="" width="72" height="72">
+                        <h1 class="h3 mb-3 fw-normal"><strong>Sign-in</strong></h1>
+
+                        <div class="form-floating pb-2">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                                required name="Email">
+                            <label for="floatingInput">Email address</label>
+                        </div>
+                        <div class="form-floating pb-2">
+                            <input type="password" class="form-control" id="floatingPassword" required
+                                placeholder="Password" name="Password">
+                            <label for="floatingPassword">Password</label>
+                        </div>
+
+                        <div class="checkbox mb-3">
+                            <label>
+                                <input type="checkbox" value="remember-me"> Remember me
+                            </label>
+                        </div>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                        <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
+                    </form>
+                </main>
             </div>
-            <div class="form-floating pb-2">
-                <input type="password" class="form-control" id="floatingPassword" required placeholder="Password"
-                    name="Password">
-                <label for="floatingPassword">Password</label>
-            </div>
+            <% } %>
 
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" value="remember-me"> Remember me
-                </label>
-            </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-            <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
-        </form>
-    </main>
-</div>
-
-
-    <%- include("./footer")-%>
+                <%- include("./footer")-%>

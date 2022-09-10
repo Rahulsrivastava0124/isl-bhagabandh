@@ -114,7 +114,7 @@ app.get("/Admission_info", async (req, res) => {
 });
 app.get("/Login", encoded, async (req, res, next) => {
   if (req.cookies.Token == undefined) {
-    res.render("Login_Desk");
+    res.render("Login_Desk",{Err_handling:false});
   } else {
     res.redirect("/ISL");
   }
@@ -128,7 +128,7 @@ app.post("/Login", encoded, async (req, res) => {
   await Register.findOne({ Email: req.body.Email })
     .then((data) => {
       if (data === null) {
-        res.redirect("/Login");
+        res.render("Login_Desk",{Err_handling:true});
       } else {
         let dechiper = Crypto.createDecipher(algo, key);
         let password_encoded =
@@ -143,7 +143,7 @@ app.post("/Login", encoded, async (req, res) => {
       }
     })
     .catch((err) => {
-    res.render('/Login');
+    res.render('Login_Desk',{Err_handling:false});
     });
 });
 app.get("/ISL", encoded, middleware.validation, async (req, res, next) => {
