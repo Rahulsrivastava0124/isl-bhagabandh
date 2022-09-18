@@ -4,7 +4,7 @@ function validation(req, res, next) {
   try {
     var validation_token = req.cookies.Token;
     const verify = token.verify(validation_token, "jwtkey");
-    console.log(verify);
+    console.log("verify");
   } catch (error) {
     res.redirect("/login");
   }

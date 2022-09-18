@@ -3,8 +3,6 @@ const mongoose = require("mongoose");
 
 let ContactUsSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  Contact: [
-    {
       Email: String,
       Username: String,
       Address: String,
@@ -15,8 +13,6 @@ let ContactUsSchema = new mongoose.Schema({
        type:Date ,
        default:Date,
      },
-    },
-  ],
 });
 
 module.exports= mongoose.model("Contact",ContactUsSchema);

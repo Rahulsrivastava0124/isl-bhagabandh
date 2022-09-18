@@ -1,6 +1,167 @@
-<%- include("./nav") -%> 
+<%- include("./Nav")-%>
+<h2 class="text-center text-danger">Edit data</h2>
+    <div class="container w-50">
+        <h3 class=" border-bottom border-primary">Current School detial</h3>
+        <form action="/Edit_submit_new_addmission/<%= data._id %> " method="post" >
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control " id="floatingInput" name="First_name" required
+                    value="  <%=data.First_name%>">
+                <label for="exampleFormControlInput1">Student First Name</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="text" class="form-control " id="floatingInput" name="Last_name" required
+                    value="  <%=data.Lastname%>">
+                <label for="exampleFormControlTextarea1">Student Last Name</label>
+            </div>
+            <div class="d-flex">
+                <label for="exampleFormControlTextarea1" class="p-3">Gender</label>
+                <div class="form-check p-3">
+                    <input class="form-check-input " type="radio" name="Check" id="flexRadioDefault1" value='on'>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Male
+                    </label>
+                </div>
+                <div class="form-check p-3">
+                    <input class="form-check-input " type="radio" name="Check" id="flexRadioDefault2" value="off" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Female
+                    </label>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control " list="datalistOptions" id="floatingInput"
+                    name="class" required value=<%=data.class%>>
+                <datalist id="datalistOptions">
+                    <option value="LKG">
+                    <option value="UKG">
+                    <option value="1">
+                    <option value="2">
+                    <option value="3">
+                    <option value="4">
+                    <option value="5">
+                    <option value="6">
+                    <option value="7">
+                    <option value="8">
+                    <option value="9">
+                    <option value="10">
+                    <option value="11">
+                    <option value="12">
+                </datalist>
+                <label for="exampleFormControlTextarea1">Class You Want To Apply For</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="date" class="form-control " id="floatingInput" name="date" required
+                  ">
+                <label for="exampleFormControlTextarea1">Student Birth Date</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="number" class="form-control " id="floatingInput" name="Age" required
+                    value= <%=data.Age%>>
+                <label for="exampleFormControlTextarea1">Student Age</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control " id="floatingInput" name="Adhaar_number" required
+                    value= <%=data.Adhaar_number%>>
+                <label for="exampleFormControlTextarea1">Adhaar Number</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control " id="floatingInput" name="Father_name" required
+                    value="  <%=data.Father_name%>">
+                <label for="exampleFormControlTextarea1">Father Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control " id="floatingInput" name="Mother_name" required
+                    value="  <%=data.Mother_name%>">
+                <label for="exampleFormControlTextarea1">Mother Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control " id="floatingInput" name="Guardian_name" required
+                    value="  <%=data.Guardian_name%>">
+                <label for="exampleFormControlTextarea1">Parent/Guardian Name</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="text" class="form-control " id="floatingInput" name="Address" required
+                    value="  <%=data.Address%>">
+                <label for="exampleFormControlTextarea1">Postal Address</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="text" class="form-control " id="floatingInput" name="Address2" required
+                    value="  <%=data.Address2%>">
+                <label for="exampleFormControlTextarea1">Postal Address 2</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="text" class="form-control " id="floatingInput" name="City" required
+                    value="  <%=data.City%>">
+                <label for="exampleFormControlTextarea1">City</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="text" class="form-control " id="floatingInput" name="State" required
+                    value=" <%=data.State%>">
+                <label for="exampleFormControlTextarea1">State</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="number" class="form-control " id="floatingInput" name="Zip_code" required
+                    value=<%=data.Zip_code%>>
+                <label for="floatingInput">Postal/Zip Code</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="number" class="form-control " id="floatingInput" name="Phone" required
+                    value=<%=data.Phone%>>
+                <label for="floatingInput">Phone No.</label>
+            </div>
+            <div class=" form-floating mb-3">
+                <input type="email" class="form-control " id="floatingInput" name="email" required
+                    value="  <%=data.email%>">
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Student image</label>
+                <input class="form-control" type="file" id="image" name="image" required>
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Signature image</label>
+                <input class="form-control" type="file" id="image1" name="image1" value="studentImg.png" required>
+            </div>
+            <h3 class=" border-bottom border-danger">Previes school information</h3>
+            <p>Have you studied for the first time in any of your schools?</p>
+            <div class="form-check">
+                <input class="form-check-input check_student" type="radio" name="flexRadioDefault"
+                    id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Yes
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    No
+                </label>
+            </div>
+            <div class="show Hide ">
+                <div class=" form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" name="previes_School">
+                    <label for="floatingInput">Previes School Name</label>
+                </div>
+                <div class=" form-floating mb-3">
+                    <input type="number" class="form-control" id="floatingInput" name="previes_Class">
+                    <label for="floatingInput">Previes School Class</label>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </div>
+    </div>
 
-<h1>Edit submit new admission</h1>
+    <script>
+        setInterval(() => {
+            let input_data = document.getElementsByName("flexRadioDefault");
+            if (input_data[0].checked) {
+                let show_Hide_data = document.getElementsByClassName("show")[0].classList.remove("Hide");
+            } else {
+                let show_Hide_data = document.getElementsByClassName("show")[0].classList.add("Hide");
+            }
+        }, 100);
 
 
-<%-include("./footer")  -%> 
+    </script>
+    <%- include("./footer")-%>

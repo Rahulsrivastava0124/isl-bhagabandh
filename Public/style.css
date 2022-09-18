@@ -6,7 +6,7 @@
 }
 .carousel-inner {
   height: 400px;
-  width: 1152px;
+  width: 1000px;
 }
 .left_carsousel {
   left: 160px !important;
@@ -44,10 +44,10 @@ body {
 
 .submit_container {
   margin: auto;
-  height: 1508px;
-  width: 1454px;
-  padding-left: 76px;
-  padding-right: 76px;
+ 
+  width: 1354px;
+  padding-left: 56px;
+  padding-right: 56px;
   padding-top: 40px;
 }
 .css-border-spacing{
