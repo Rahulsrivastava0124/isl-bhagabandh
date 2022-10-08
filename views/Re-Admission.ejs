@@ -1,0 +1,31 @@
+<%- include('./Nav') %>
+
+
+    <div class="container w-25 border rounded-3 shadow pb-lg-5 mt-lg-5 pt-4">
+        <form method="post" action="/re-admission">
+            <h3 class="text-center py-3">Re-Addmision</h3>
+            <div class="mb-3">
+                <label for="exampleInputNumber1" class="form-label">Application Number</label>
+                <input type="number" class="form-control" id="exampleInputEmail1" name="Application_no">
+                <div id="emailHelp" class="form-text">We'll never share your Application Number with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputNumber1" class="form-label">Form Number</label>
+                <input type="number" class="form-control" id="exampleInputNumber1" name="Form_no">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputName1" class="form-label">Student First Name</label>
+                <input type="text" class="form-control" id="exampleInputName1" name="First_Name">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+
+
+
+
+
+
+    <%- include('./Footer') %>

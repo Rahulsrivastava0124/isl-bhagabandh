@@ -199,7 +199,7 @@
         <script>
             let pdf_generate = document.getElementById('pdf_generate');
             if (`<%=data._id%>` == '') {
-                pdf_generate.setAttribute('href', `/pdf_generate/<%=data._v%>`)
+                pdf_generate.setAttribute('href', `/pdf_generate/<%=data.__v%>`)
             } else {
                 pdf_generate.setAttribute('href', `/pdf_generate/<%=data._id%>`)
             }

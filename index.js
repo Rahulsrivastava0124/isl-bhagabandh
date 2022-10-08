@@ -7,6 +7,7 @@ const Crypto = require("crypto");
 const Multer = require("multer");
 const User_Data = require("./Schema/New_admission");
 const cookie_parser = require("cookie-parser");
+
 var key = "password";
 var algo = "aes256";
 const Token = require("jsonwebtoken");
@@ -21,6 +22,7 @@ const ejs = require("ejs");
 const path = require("path");
 const pdf = require("html-pdf");
 const app = express();
+
 const port = 3005;
 
 // connect mongoose
@@ -55,7 +57,11 @@ app.use(express.static(__dirname + "/Public"));
 app.use(express.static(__dirname + "/uploads"));
 app.use(cookie_parser());
 
-app.get("/", (req, res) => res.render("Home"));
+app.get("/",encoded, (req, res) =>{ 
+  res.render("Home",{states:req.cookies.states});
+
+});
+
 app.get("/Register", (req, res) => {
   res.render("Register");
 });
@@ -95,8 +101,10 @@ app.post("/", json_parser, encoded, (req, res) => {
     City: req.body.City,
     Description: req.body.Description,
   });
-  ContactUs.save();
-  res.render("Home");
+  ContactUs.save().then((data) => {
+    res.cookie("states", "true", { maxAge: 2000 });
+    res.redirect("/");
+  });
 });
 app.post("/ISL/Query/:_id", encoded, (req, res) => {
   console.log(req.params._id);
@@ -286,7 +294,7 @@ app.post(
           Previes_yes: req.body.flexRadioDefault,
           Previes_no: req.body.flexRadioDefault,
         },
-        _v: req.cookies.form_id,
+        __v: req.cookies.form_id,
       };
       await User_Data.updateMany(filter, update)
         .then((acknowledged) => {
@@ -360,6 +368,35 @@ app.get(
       });
   }
 );
+
+//re-Admission
+app.get("/re-admission", encoded, middleware.validation, (req, res) => {
+  res.render("Re-Admission");
+});
+
+app.post("/re-admission", encoded, middleware.validation, (req, res) => {
+  try {
+    User_Data.findOne({ Application_no: req.body.Application_no })
+      .then((data) => {
+        res.cookie("form_id", `${data._id}`);
+        if (data == null) {
+          res.render("Re-Admission");
+        }
+        res.render("Edit_submit_new_admission", { data: data });
+      })
+      .catch((err) => {
+        res.render("Re-Admission");
+      });
+  } catch (error) {
+    console.log("error");
+    res.render("Re-Admission");
+  }
+});
+
+//Edit-re-Admission
+app.get("/Edit-Re-Admission", (req, res) => {
+  res.render("Edit-Re-Admission");
+});
 
 //define port and app listen
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

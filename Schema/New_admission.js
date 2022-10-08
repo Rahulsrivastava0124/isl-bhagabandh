@@ -32,6 +32,6 @@ const new_admissionSchema = new mongoose.Schema({
   Form: Number,
   Previes_School_Name: String,
   Previes_School_Class: Number,
-  _v:String,
+  __v:String,
 });
 module.exports = ImageModel = mongoose.model("User_Data", new_admissionSchema);
