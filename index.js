@@ -28,7 +28,7 @@ const port = process.env.PORT || 3005;
 // connect mongoose
 mongoose
   .connect(
-    "mongodb+srv://Rahulsrivastava2001:5xH6nNVjag8cxzXZ@cluster0.6rsbt.mongodb.net/contacts?retryWrites=true&w=majority",
+    "mongodb+srv://RahulSrivastava2001:2A9TXr4qikVd7TMN@cluster0.ielzhap.mongodb.net/contacts",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -109,9 +109,9 @@ app.post("/", json_parser, encoded, (req, res) => {
   });
 });
 app.post("/ISL/Query/:_id", encoded, (req, res) => {
-  console.log(req.params._id);
+
   Contact.deleteOne({ _id: req.params._id }).then((data) => {
-    console.log(data.acknowledged);
+
     if (data.acknowledged == true) {
       res.cookie("states", "true", { maxAge: 2000 });
     } else {
@@ -245,10 +245,10 @@ app.get(
   middleware.validation,
   async (req, res) => {
     let form_id = req.cookies.form_id;
-    console.log(form_id);
+
     await User_Data.findOne({ _id: form_id })
       .then((data) => {
-        console.log(data);
+ 
         res.cookie("Application_No", `${data.Admission_data.Application_no}`);
         res.cookie("Form_no", `${data.Admission_data.Form}`);
         res.render("Edit_submit_new_admission", { data: data });
@@ -264,7 +264,7 @@ app.post(
   middleware.validation,
   async (req, res) => {
     try {
-      console.log(req.cookies.form_id);
+
       const filter = { _id: req.params._id };
       const update = {
         Admission_data: {
@@ -326,7 +326,7 @@ app.get(
 
     await User_Data.findOne({ _id: _id })
       .then((data) => {
-        console.log(data);
+   
         const user = {
           data: data,
         };
