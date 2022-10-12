@@ -23,7 +23,7 @@ const path = require("path");
 const pdf = require("html-pdf");
 const app = express();
 
-const port = 3005;
+const port = process.env.PORT || 3005;
 
 // connect mongoose
 mongoose
@@ -57,9 +57,8 @@ app.use(express.static(__dirname + "/Public"));
 app.use(express.static(__dirname + "/uploads"));
 app.use(cookie_parser());
 
-app.get("/",encoded, (req, res) =>{ 
-  res.render("Home",{states:req.cookies.states});
-
+app.get("/", encoded, (req, res) => {
+  res.render("Home", { states: req.cookies.states });
 });
 
 app.get("/Register", (req, res) => {
@@ -89,7 +88,7 @@ app.post("/Register", encoded, (req, res) => {
         console.log(err);
       });
   }
-  res.render("Login_Desk");
+  res.redirect("/ISL");
 });
 app.post("/", json_parser, encoded, (req, res) => {
   const ContactUs = new Contact({
@@ -184,36 +183,38 @@ app.post(
     var Form_number = Math.floor(Math.random() * 1234);
 
     var User = new User_Data({
-      First_name: req.body.First_name,
-      Lastname: req.body.Last_name,
-      Gender: {
-        male: req.body.Check,
-        Female: req.body.Check1,
-      },
-      class: req.body.class,
-      date: req.body.date,
-      Age: req.body.Age,
-      Adhaar_number: req.body.Adhaar_number,
-      //Adhaar_image:`Adhaar-${uniqe}`,
-      Father_name: req.body.Father_name,
-      Mother_name: req.body.Mother_name,
-      Guardian_name: req.body.Guardian_name,
-      Address: req.body.Address,
-      Address2: req.body.Address2,
-      City: req.body.City,
-      State: req.body.State,
-      Zip_code: req.body.Zip_code,
-      Phone: req.body.Phone,
-      email: req.body.email,
-      image: `image-${uniqe}`,
-      image1: `image1-${uniqe}`,
-      Application_no: n,
-      Form: Form_number,
-      Previes_School_Name: req.body.previes_School,
-      Previes_School_Class: req.body.previes_Class,
-      Previes_value: {
-        Previes_yes: req.body.flexRadioDefault,
-        Previes_no: req.body.flexRadioDefault,
+      Admission_data: {
+        First_name: req.body.First_name,
+        Lastname: req.body.Last_name,
+        Gender: {
+          male: req.body.Check,
+          Female: req.body.Check1,
+        },
+        class: req.body.class,
+        date: req.body.date,
+        Age: req.body.Age,
+        Adhaar_number: req.body.Adhaar_number,
+        //Adhaar_image:`Adhaar-${uniqe}`,
+        Father_name: req.body.Father_name,
+        Mother_name: req.body.Mother_name,
+        Guardian_name: req.body.Guardian_name,
+        Address: req.body.Address,
+        Address2: req.body.Address2,
+        City: req.body.City,
+        State: req.body.State,
+        Zip_code: req.body.Zip_code,
+        Phone: req.body.Phone,
+        email: req.body.email,
+        image: `image-${uniqe}`,
+        image1: `image1-${uniqe}`,
+        Application_no: n,
+        Form: Form_number,
+        Previes_School_Name: req.body.previes_School,
+        Previes_School_Class: req.body.previes_Class,
+        Previes_value: {
+          Previes_yes: req.body.flexRadioDefault,
+          Previes_no: req.body.flexRadioDefault,
+        },
       },
     });
     User.save()
@@ -242,11 +243,11 @@ app.get(
   async (req, res) => {
     let form_id = req.cookies.form_id;
     console.log(form_id);
-
     await User_Data.findOne({ _id: form_id })
       .then((data) => {
-        res.cookie("Application_No", `${data.Application_no}`);
-        res.cookie("Form_no", `${data.Form}`);
+        console.log(data);
+        res.cookie("Application_No", `${data.Admission_data.Application_no}`);
+        res.cookie("Form_no", `${data.Admission_data.Form}`);
         res.render("Edit_submit_new_admission", { data: data });
       })
       .catch((err) => {
@@ -260,50 +261,49 @@ app.post(
   middleware.validation,
   async (req, res) => {
     try {
-      console.log(req.body.First_name);
-
+      console.log(req.cookies.form_id);
       const filter = { _id: req.params._id };
       const update = {
-        First_name: req.body.First_name,
-        Lastname: req.body.Last_name,
-        Gender: {
-          male: req.body.Check,
-          Female: req.body.Check1,
-        },
-        class: req.body.class,
-        date: req.body.date,
-        Age: req.body.Age,
-        Adhaar_number: req.body.Adhaar_number,
-        Application_no: req.cookies.Application_No,
-        Form: req.cookies.Form_no,
-        Father_name: req.body.Father_name,
-        Mother_name: req.body.Mother_name,
-        Guardian_name: req.body.Guardian_name,
-        Address: req.body.Address,
-        Address2: req.body.Address2,
-        City: req.body.City,
-        State: req.body.State,
-        Zip_code: req.body.Zip_code,
-        Phone: req.body.Phone,
-        email: req.body.email,
-        image: "image-1663089801710",
-        image1: "image1-1663089801710",
-        Previes_School_Name: req.body.previes_School,
-        Previes_School_Class: req.body.previes_Class,
-        Previes_value: {
-          Previes_yes: req.body.flexRadioDefault,
-          Previes_no: req.body.flexRadioDefault,
+        Admission_data: {
+          First_name: req.body.First_name,
+          Lastname: req.body.Last_name,
+          Gender: {
+            male: req.body.Check,
+            Female: req.body.Check1,
+          },
+          class: req.body.class,
+          date: req.body.date,
+          Age: req.body.Age,
+          Adhaar_number: req.body.Adhaar_number,
+          Application_no: req.cookies.Application_No,
+          Form: req.cookies.Form_no,
+          Father_name: req.body.Father_name,
+          Mother_name: req.body.Mother_name,
+          Guardian_name: req.body.Guardian_name,
+          Address: req.body.Address,
+          Address2: req.body.Address2,
+          City: req.body.City,
+          State: req.body.State,
+          Zip_code: req.body.Zip_code,
+          Phone: req.body.Phone,
+          email: req.body.email,
+          image: "image-1663089801710",
+          image1: "image1-1663089801710",
+          Previes_School_Name: req.body.previes_School,
+          Previes_School_Class: req.body.previes_Class,
+          Previes_value: {
+            Previes_yes: req.body.flexRadioDefault,
+            Previes_no: req.body.flexRadioDefault,
+          },
         },
         __v: req.cookies.form_id,
       };
       await User_Data.updateMany(filter, update)
         .then((acknowledged) => {
-          // console.log(data);
           res.render("submitNewadmission", {
             data: update,
             acknowledged: acknowledged,
           });
-          console.log(data);
         })
         .catch((err) => {
           res.send(err);

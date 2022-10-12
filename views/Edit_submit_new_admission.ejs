@@ -1,16 +1,16 @@
 <%- include("./Nav")-%>
 <h2 class="text-center text-danger">Edit data</h2>
-    <div class="container w-50">
+    <div class="container" style="max-width:700px ;">
         <h3 class=" border-bottom border-primary">Current School detial</h3>
         <form action="/Edit_submit_new_addmission/<%= data._id %> " method="post" >
             <div class="form-floating mb-3">
                 <input type="text" class="form-control " id="floatingInput" name="First_name" required
-                    value="  <%=data.First_name%>">
+                    value="  <%=data.Admission_data.First_name%>">
                 <label for="exampleFormControlInput1">Student First Name</label>
             </div>
             <div class=" form-floating mb-3">
                 <input type="text" class="form-control " id="floatingInput" name="Last_name" required
-                    value="  <%=data.Lastname%>">
+                    value="  <%=data.Admission_data.Lastname%>">
                 <label for="exampleFormControlTextarea1">Student Last Name</label>
             </div>
             <div class="d-flex">
@@ -30,7 +30,7 @@
             </div>
             <div class="form-floating mb-3">
                 <input type="number" class="form-control " list="datalistOptions" id="floatingInput"
-                    name="class" required value=<%=data.class%>>
+                    name="class" required value=<%=data.Admission_data.class%>>
                 <datalist id="datalistOptions">
                     <option value="LKG">
                     <option value="UKG">
@@ -56,62 +56,62 @@
             </div>
             <div class=" form-floating mb-3">
                 <input type="number" class="form-control " id="floatingInput" name="Age" required
-                    value= <%=data.Age%>>
+                    value= <%=data.Admission_data.Age%>>
                 <label for="exampleFormControlTextarea1">Student Age</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="number" class="form-control " id="floatingInput" name="Adhaar_number" required
-                    value= <%=data.Adhaar_number%>>
+                    value= <%=data.Admission_data.Adhaar_number%>>
                 <label for="exampleFormControlTextarea1">Adhaar Number</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control " id="floatingInput" name="Father_name" required
-                    value="  <%=data.Father_name%>">
+                    value="  <%=data.Admission_data.Father_name%>">
                 <label for="exampleFormControlTextarea1">Father Name</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control " id="floatingInput" name="Mother_name" required
-                    value="  <%=data.Mother_name%>">
+                    value="  <%=data.Admission_data.Mother_name%>">
                 <label for="exampleFormControlTextarea1">Mother Name</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control " id="floatingInput" name="Guardian_name" required
-                    value="  <%=data.Guardian_name%>">
+                    value="  <%=data.Admission_data.Guardian_name%>">
                 <label for="exampleFormControlTextarea1">Parent/Guardian Name</label>
             </div>
             <div class=" form-floating mb-3">
                 <input type="text" class="form-control " id="floatingInput" name="Address" required
-                    value="  <%=data.Address%>">
+                    value="  <%=data.Admission_data.Address%>">
                 <label for="exampleFormControlTextarea1">Postal Address</label>
             </div>
             <div class=" form-floating mb-3">
                 <input type="text" class="form-control " id="floatingInput" name="Address2" required
-                    value="  <%=data.Address2%>">
+                    value="  <%=data.Admission_data.Address2%>">
                 <label for="exampleFormControlTextarea1">Postal Address 2</label>
             </div>
             <div class=" form-floating mb-3">
                 <input type="text" class="form-control " id="floatingInput" name="City" required
-                    value="  <%=data.City%>">
+                    value="  <%=data.Admission_data.City%>">
                 <label for="exampleFormControlTextarea1">City</label>
             </div>
             <div class=" form-floating mb-3">
                 <input type="text" class="form-control " id="floatingInput" name="State" required
-                    value=" <%=data.State%>">
+                    value=" <%=data.Admission_data.State%>">
                 <label for="exampleFormControlTextarea1">State</label>
             </div>
             <div class=" form-floating mb-3">
                 <input type="number" class="form-control " id="floatingInput" name="Zip_code" required
-                    value=<%=data.Zip_code%>>
+                    value=<%=data.Admission_data.Zip_code%>>
                 <label for="floatingInput">Postal/Zip Code</label>
             </div>
             <div class=" form-floating mb-3">
                 <input type="number" class="form-control " id="floatingInput" name="Phone" required
-                    value=<%=data.Phone%>>
+                    value=<%=data.Admission_data.Phone%>>
                 <label for="floatingInput">Phone No.</label>
             </div>
             <div class=" form-floating mb-3">
                 <input type="email" class="form-control " id="floatingInput" name="email" required
-                    value="  <%=data.email%>">
+                    value="  <%=data.Admission_data.email%>">
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="mb-3">

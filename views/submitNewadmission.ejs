@@ -19,18 +19,18 @@
                 <tr>
                     <td>
                         Your application number:<strong>
-                            <%=data.Application_no%>
+                            <%=data.Admission_data.Application_no%>
                         </strong>
                     </td>
                     <td>
                         Form number:<strong>
-                            <%=data.Form%>
+                            <%=data.Admission_data.Form%>
                         </strong>
                     </td>
                 </tr>
                 <tr>
                     <td>Student Signature:-</td>
-                    <td> <img src="http://localhost:3005/<%=data.image1%>.jpg"
+                    <td> <img src="http://localhost:3005/<%=data.Admission_data.image1%>.jpg"
                             class="rounded new_admission_image1 img-thumbnail">
                     </td>
                 </tr>
@@ -38,12 +38,13 @@
                     <td>
                         Student Name:
                         <strong>
-                            <%=data.First_name %>
-                                <%= data.Lastname %>
+                            <%=data.Admission_data.First_name %>
+                                <%= data.Admission_data.Lastname %>
                         </strong>
                     </td>
                     <td rowspan="4">
-                        <img src="/<%=data.image%>.jpg" class="rounded new_admission_image img-thumbnail">
+                        <img src="http://localhost:3005/<%=data.Admission_data.image%>.jpg"
+                            class="rounded new_admission_image img-thumbnail">
 
                     </td>
                 </tr>
@@ -51,7 +52,7 @@
                 <tr>
                     <td>
                         Gender:
-                        <% if (data.Gender.male=="on" ) { %>
+                        <% if (data.Admission_data.Gender.male=="on" ) { %>
                             <strong>Male</strong>
                             <% } else { %>
                                 <strong>Female</strong>
@@ -62,7 +63,7 @@
                     <td>
                         Class:
                         <strong>
-                            <%= data.class %>
+                            <%= data.Admission_data.class %>
                         </strong>
                     </td>
                 </tr>
@@ -70,7 +71,7 @@
                     <td>
                         Date:
                         <strong>
-                            <%=data.date %>
+                            <%=data.Admission_data.date %>
                         </strong>
                     </td>
                 </tr>
@@ -79,13 +80,13 @@
 
                         Father Name:</h3>
                         <strong>
-                            <%= data.Father_name %>
+                            <%= data.Admission_data.Father_name %>
                         </strong>
                     </td>
                     <td>
                         Mother Name:
                         <strong>
-                            <%= data.Mother_name %>
+                            <%= data.Admission_data.Mother_name %>
                         </strong>
                     </td>
                 </tr>
@@ -93,13 +94,13 @@
                     <td>
                         Guardian Name:
                         <strong>
-                            <%= data.Guardian_name %>
+                            <%= data.Admission_data.Guardian_name %>
                         </strong>
                     </td>
                     <td>
                         Aadhar Card:
                         <strong>
-                            <%= data.Adhaar_number %>
+                            <%= data.Admission_data.Adhaar_number %>
                         </strong>
                     </td>
                 </tr>
@@ -108,7 +109,7 @@
 
                         Address:
                         <strong>
-                            <%= data.Address %>
+                            <%= data.Admission_data.Address %>
                         </strong>
                     </td>
                     <td></td>
@@ -117,7 +118,7 @@
                     <td>
                         Address2:
                         <strong>
-                            <%= data.Address2 %>
+                            <%= data.Admission_data.Address2 %>
                         </strong>
                     </td>
                     <td></td>
@@ -126,13 +127,13 @@
                     <td>
                         City:
                         <strong>
-                            <%=data.City %>
+                            <%=data.Admission_data.City %>
                         </strong>
                     </td>
                     <td>
                         State:
                         <strong>
-                            <%= data.State %>
+                            <%= data.Admission_data.State %>
                         </strong>
                     </td>
                 </tr>
@@ -140,13 +141,13 @@
                     <td>
                         Zip_code:
                         <strong>
-                            <%= data.Zip_code %>
+                            <%= data.Admission_data.Zip_code %>
                         </strong>
                     </td>
                     <td>
                         Phone:
                         <strong>
-                            <%= data.Phone %>
+                            <%= data.Admission_data.Phone %>
                         </strong>
                     </td>
                 </tr>
@@ -154,18 +155,18 @@
                     <td>
                         email:
                         <strong>
-                            <%= data.email %>
+                            <%= data.Admission_data.email %>
                         </strong>
                     </td>
                     <td>
                         Age:
                         <strong>
-                            <%= data.Age %>
+                            <%= data.Admission_data.Age %>
                         </strong>
                     </td>
 
                 </tr>
-                <% if (data.Previes_value.Previes_yes) { %>
+                <% if (data.Admission_data.Previes_value.Previes_yes) { %>
                     <tr>
                         <th colspan="3" class="text-center fs-4">
                             Previes School Information
@@ -173,10 +174,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <%=data.Previes_School_Name %>
+                            <%=data.Admission_data.Previes_School_Name %>
                         </td>
                         <td>
-                            <%=data.Previes_School_Class %>
+                            <%=data.Admission_data.Previes_School_Class %>
                         </td>
                     </tr>
                     <% } else { %>

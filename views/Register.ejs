@@ -7,21 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
-<style>
-    
-    .box_shodaw{
-    -webkit-box-shadow: 6px 4px 19px -7px rgba(0, 0, 0, 1);
-    -moz-box-shadow: 6px 4px 19px -7px rgba(0, 0, 0, 1);
-    box-shadow: 6px 4px 15px -9px rgba(0, 0, 0, 1);
-    z-index: 5;
-    background-color: red;
-}
-</style>
+
 <body>
 
-    <div class="text-center container w-25 my-4 box_shodaw pt-4 rounded-3 box_shodaw">
+    <div class="text-center container my-4  pt-4 rounded-3 shadow bg-light" style="max-width: 500px;">
         <main class="form-signin w-100 m-auto">
-            <form  method="post">
+            <form  method="post" action="">
                 <img class="mb-4" src="/isl_logo.jpg" alt="" width="72" height="72">
                 <h1 class="h3 mb-3 fw-normal"><strong>Register</strong></h1>
     
@@ -35,14 +26,9 @@
                     <label for="floatingPassword">Password</label>
                 </div>
                 <div class="form-floating pb-2">
-                    <input type="password" class="form-control" id="floatingPassword" required placeholder="Password"
+                    <input type="password" class="form-control" id="ConfirmfloatingPassword" required placeholder="Confirmf Password"
                         name="Confirm_Password">
                     <label for="floatingPassword"> Confirm Password</label>
-                </div>
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
                 <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
