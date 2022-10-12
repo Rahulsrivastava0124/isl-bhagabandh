@@ -27,10 +27,13 @@ const port = process.env.PORT || 3005;
 
 // connect mongoose
 mongoose
-  .connect("mongodb://localhost:27017/contacts", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://Rahulsrivastava2001:5xH6nNVjag8cxzXZ@cluster0.6rsbt.mongodb.net/contacts?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then((result) => {
     console.log("connected");
   })
