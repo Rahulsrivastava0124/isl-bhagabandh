@@ -109,9 +109,7 @@ app.post("/", json_parser, encoded, (req, res) => {
   });
 });
 app.post("/ISL/Query/:_id", encoded, (req, res) => {
-
   Contact.deleteOne({ _id: req.params._id }).then((data) => {
-
     if (data.acknowledged == true) {
       res.cookie("states", "true", { maxAge: 2000 });
     } else {
@@ -248,7 +246,6 @@ app.get(
 
     await User_Data.findOne({ _id: form_id })
       .then((data) => {
- 
         res.cookie("Application_No", `${data.Admission_data.Application_no}`);
         res.cookie("Form_no", `${data.Admission_data.Form}`);
         res.render("Edit_submit_new_admission", { data: data });
@@ -264,7 +261,6 @@ app.post(
   middleware.validation,
   async (req, res) => {
     try {
-
       const filter = { _id: req.params._id };
       const update = {
         Admission_data: {
@@ -326,7 +322,6 @@ app.get(
 
     await User_Data.findOne({ _id: _id })
       .then((data) => {
-   
         const user = {
           data: data,
         };
@@ -350,6 +345,7 @@ app.get(
               let user_filename = `user${_id}.pdf`;
               console.log("pdf create successful");
               const sendPdfPth = path.resolve(__dirname, `user${_id}.pdf`);
+             
               fs.readFile(sendPdfPth, async (err, file) => {
                 if (err) {
                   console.log(err);
@@ -360,7 +356,9 @@ app.get(
                     "Content-Disposition",
                     "attachment;filename=" + user_filename
                   );
+
                   await res.send(file);
+            
                 }
               });
             }
@@ -379,13 +377,25 @@ app.get("/re-admission", encoded, middleware.validation, (req, res) => {
 
 app.post("/re-admission", encoded, middleware.validation, (req, res) => {
   try {
-    User_Data.findOne({ Application_no: req.body.Application_no })
+    User_Data.findOne({
+      "Admission_data.Application_no": req.body.Application_no,
+    })
       .then((data) => {
-        res.cookie("form_id", `${data._id}`);
-        if (data == null) {
-          res.render("Re-Admission");
+        if (
+          req.body.Form_no == data.Admission_data.Form &&
+          req.body.First_Name == data.Admission_data.First_name
+        ) {
+          res.cookie("form_id", `${data._id}`);
+          if (data == null) {
+            res.render("Re-Admission");
+          }
+          res.render("re_admission_set_data", {
+            data: data,
+            input_Status: "readonly",
+          });
+        } else {
+          console.log("not matched");
         }
-        res.render("Edit_submit_new_admission", { data: data });
       })
       .catch((err) => {
         res.render("Re-Admission");
