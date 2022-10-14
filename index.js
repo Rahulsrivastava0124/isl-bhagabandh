@@ -258,6 +258,7 @@ app.get(
 app.post(
   "/Edit_submit_new_addmission/:_id",
   encoded,
+  upload,
   middleware.validation,
   async (req, res) => {
     try {
@@ -286,8 +287,8 @@ app.post(
           Zip_code: req.body.Zip_code,
           Phone: req.body.Phone,
           email: req.body.email,
-          image: "image-1663089801710",
-          image1: "image1-1663089801710",
+          image: `image-${uniqe}`,
+          image1:`image1-${uniqe}`,
           Previes_School_Name: req.body.previes_School,
           Previes_School_Class: req.body.previes_Class,
           Previes_value: {

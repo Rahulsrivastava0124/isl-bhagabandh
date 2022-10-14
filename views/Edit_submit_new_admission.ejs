@@ -2,7 +2,7 @@
 <h2 class="text-center text-danger">Edit data</h2>
     <div class="container" style="max-width:700px ;">
         <h3 class=" border-bottom border-primary">Current School detial</h3>
-        <form action="/Edit_submit_new_addmission/<%= data._id %> " method="post" >
+        <form action="/Edit_submit_new_addmission/<%= data._id %> " method="post" enctype="multipart/form-data">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control " id="floatingInput" name="First_name" required
                     value="  <%=data.Admission_data.First_name%>">

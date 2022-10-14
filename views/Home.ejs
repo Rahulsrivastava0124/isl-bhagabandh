@@ -164,8 +164,7 @@
             </div>
             <div class="col-md-6">
               <label for="PhoneNumber" class="form-label">Phone Number</label>
-              <input type="text" class="form-control" required id="Number" pattern="[0-9]{10}"
-                name="PhoneNumber">
+              <input type="text" class="form-control" required id="Number" pattern="[0-9]{10}" name="PhoneNumber">
             </div>
             <div class="col-12">
               <button type="submit" class="btn btn-primary text-center" id="QuerySumbitBtn"><span
@@ -186,35 +185,38 @@
           integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
           crossorigin="anonymous"></script>
         <script>
-    if (document.getElementById('toast_close_btn') != null) {
-      document.getElementById('toast_close_btn').addEventListener('click', () => {
-        document.getElementById('Toast_div').classList.remove('d-block');
-      });
-      let btn_value = document.getElementById('Toast_div').classList;
-      if (btn_value[5] == 'd-block') {
-        const collaps_btn = setInterval(() => {
-          document.getElementById('Toast_div').classList.remove('d-block');
-        }, 5000);
-      } else {
-        clearInterval(collaps_btn);
-      }
-    }
+          if (document.getElementById('toast_close_btn') != null) {
+            document.getElementById('toast_close_btn').addEventListener('click', () => {
+              document.getElementById('Toast_div').classList.remove('d-block');
+            });
+            let btn_value = document.getElementById('Toast_div').classList;
+            if (btn_value[5] == 'd-block') {
+              const collaps_btn = setInterval(() => {
+                document.getElementById('Toast_div').classList.remove('d-block');
+              }, 5000);
+            } else {
+              clearInterval(collaps_btn);
+            }
+          }
 
-    const checkInputfield = setInterval(() => {
-      let Email = document.getElementById("Email").value == ''
-      let inputusername4 = document.getElementById("inputusername4").value == ''
-      let inputAddress = document.getElementById("inputAddress").value == ''
-      let Number = document.getElementById("Number").value.length == ''
-      let inputCity = document.getElementById("inputCity").value == ''
-      let text = document.getElementById("text").value == ''
-      if (Email && inputusername4 && inputAddress && Number && inputCity && text) {
-        document.getElementById("QuerySumbitBtn").classList.add("disabled");
-      } else if (document.getElementById("Number").value.length == 10) {
-        document.getElementById("QuerySumbitBtn").classList.remove("disabled");
-      }
-    }, 500);
-    document.getElementById("QuerySumbitBtn").addEventListener('click', () => {
-      document.getElementById("QuerySumbitBtn").classList.add("disabled");
-      let data = document.getElementById("QuerySumbitBtn").childNodes
-      data[0].classList.add("spinner-border");
-    })        </script>
+          const checkInputfield = setInterval(() => {
+            let Email = document.getElementById("Email").value == ''
+            let inputusername4 = document.getElementById("inputusername4").value == ''
+            let inputAddress = document.getElementById("inputAddress").value == ''
+            let Number = document.getElementById("Number").value.length == ''
+            let inputCity = document.getElementById("inputCity").value == ''
+            let text = document.getElementById("text").value == ''
+            if (Email && inputusername4 && inputAddress && Number && inputCity && text) {
+              document.getElementById("QuerySumbitBtn").classList.add("disabled");
+            } else if (document.getElementById("Number").value.length == 10) {
+              document.getElementById("QuerySumbitBtn").classList.remove("disabled");
+            }else if (document.getElementById("Number").value.length != 10){
+              document.getElementById("QuerySumbitBtn").classList.add("disabled");
+            }
+          }, 50);
+          document.getElementById("QuerySumbitBtn").addEventListener('click', () => {
+            document.getElementById("QuerySumbitBtn").classList.add("disabled");
+            let data = document.getElementById("QuerySumbitBtn").childNodes
+            data[0].classList.add("spinner-border");
+          })   
+        </script>
