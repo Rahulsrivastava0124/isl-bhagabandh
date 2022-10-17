@@ -7,7 +7,7 @@ const Crypto = require("crypto");
 const Multer = require("multer");
 const User_Data = require("./Schema/New_admission");
 const cookie_parser = require("cookie-parser");
-
+var Date_format = require("date-format");
 var key = "password";
 var algo = "aes256";
 const Token = require("jsonwebtoken");
@@ -94,6 +94,7 @@ app.post("/Register", encoded, (req, res) => {
   res.redirect("/ISL");
 });
 app.post("/", json_parser, encoded, (req, res) => {
+  res.cookie("spin", "disabled", { maxAge: 2000 });
   const ContactUs = new Contact({
     _id: mongoose.Types.ObjectId(),
     Email: req.body.Email,
@@ -108,6 +109,7 @@ app.post("/", json_parser, encoded, (req, res) => {
     res.redirect("/");
   });
 });
+
 app.post("/ISL/Query/:_id", encoded, (req, res) => {
   Contact.deleteOne({ _id: req.params._id }).then((data) => {
     if (data.acknowledged == true) {
@@ -288,7 +290,7 @@ app.post(
           Phone: req.body.Phone,
           email: req.body.email,
           image: `image-${uniqe}`,
-          image1:`image1-${uniqe}`,
+          image1: `image1-${uniqe}`,
           Previes_School_Name: req.body.previes_School,
           Previes_School_Class: req.body.previes_Class,
           Previes_value: {
@@ -346,7 +348,7 @@ app.get(
               let user_filename = `user${_id}.pdf`;
               console.log("pdf create successful");
               const sendPdfPth = path.resolve(__dirname, `user${_id}.pdf`);
-             
+
               fs.readFile(sendPdfPth, async (err, file) => {
                 if (err) {
                   console.log(err);
@@ -359,7 +361,6 @@ app.get(
                   );
 
                   await res.send(file);
-            
                 }
               });
             }
@@ -406,11 +407,38 @@ app.post("/re-admission", encoded, middleware.validation, (req, res) => {
     res.render("Re-Admission");
   }
 });
+//Submit Re-Admission
+app.post(
+  "/re-admission/:_id",
+  encoded,
+  middleware.validation,
+  async function (req, res) {
 
-//Edit-re-Admission
-app.get("/Edit-Re-Admission", (req, res) => {
-  res.render("Edit-Re-Admission");
-});
+    let Date = Date_format.asString();
+    let object = `Re_Admission_data_class_${req.body.class}`;
+ 
+    const filter = { _id: req.params._id };
+    const data = [
+      {
+        $set: {
+          [object]: {
+            class: req.body.class,
+            Reason: req.body.Reason,
+            Date: Date,
+          },
+        },
+      },
+    ];
+    User_Data.update(filter, data)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    res.redirect("/Re-Admission");
+  }
+);
 
 //define port and app listen
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

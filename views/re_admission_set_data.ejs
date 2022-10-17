@@ -2,8 +2,8 @@
 
     <h2 class="text-center text-danger">Re-Admission data</h2>
     <div class="container" style="max-width:700px ;">
-        <h3 class=" border-bottom border-primary">Current School detial</h3>
-        <form action="/re-admission" method="post">
+        <h3 class=" border-bottom border-primary">Current School details</h3>
+        <form action="/re-admission/<%= data._id %>" method="post">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control " id="floatingInput" name="First_name" <%=input_Status%> required
                 value=" <%=data.Admission_data.First_name%>">
@@ -32,12 +32,16 @@
                 </div>
             </div>
             <div class="form-floating mb-3 d-flex  ">
-                <input type="number" class="form-control border-danger " list="datalistOptions" id="floatingInput"
+                <input type="number" class="form-control border-danger " list="datalistOptions" id="ClassInput"
                     name="class" required value=<%=`${data.Admission_data.class+1}`%>
                 <%=input_Status%>>
-                    <button class="btn btn-warning  mx-1 m-2" type="button" id="inputGroupFileAddon04"><i
-                            class="bi bi-pencil-square"></i></button>
+                    <button class="btn btn-warning mx-1 m-2" type="button" id="inputGroupFileAddon04"
+                        onclick="EditInputClass()"><i class="bi bi-pencil-square"></i></button>
                     <label for="exampleFormControlTextarea1">Class You Want To Apply For</label>
+            </div>
+            <div class="input-group Hide mb-3" id="Reason">
+                <span class="input-group-text">Reason</span>
+                <textarea class="form-control" aria-label="With textarea" name="Reason" id="Reason" required></textarea>
             </div>
             <div class=" form-floating mb-3">
                 <input type="date" class="form-control " id="floatingInput" name="date" <%=input_Status%> required ">
@@ -111,7 +115,12 @@
         </form>
     </div>
     </div>
-
+    <script>
+        function EditInputClass() {
+            document.getElementById("ClassInput").removeAttribute("readonly")
+            document.getElementById("Reason").classList.remove("Hide")
+        }
+    </script>
 
 
 

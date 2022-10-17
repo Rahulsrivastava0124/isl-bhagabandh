@@ -167,8 +167,7 @@
               <input type="text" class="form-control" required id="Number" pattern="[0-9]{10}" name="PhoneNumber">
             </div>
             <div class="col-12">
-              <button type="submit" class="btn btn-primary text-center" id="QuerySumbitBtn"><span
-                  class=" spinner-border-sm" role="status" aria-hidden="true"></span>Submit</button>
+              <button type="submit" class="btn btn-primary text-center" id="QuerySumbitBtn">Submit</button>
             </div>
           </form>
         </div>
@@ -210,13 +209,12 @@
               document.getElementById("QuerySumbitBtn").classList.add("disabled");
             } else if (document.getElementById("Number").value.length == 10) {
               document.getElementById("QuerySumbitBtn").classList.remove("disabled");
-            }else if (document.getElementById("Number").value.length != 10){
+            } else if (document.getElementById("Number").value.length != 10) {
               document.getElementById("QuerySumbitBtn").classList.add("disabled");
             }
           }, 50);
           document.getElementById("QuerySumbitBtn").addEventListener('click', () => {
             document.getElementById("QuerySumbitBtn").classList.add("disabled");
-            let data = document.getElementById("QuerySumbitBtn").childNodes
-            data[0].classList.add("spinner-border");
+
           })   
         </script>

@@ -6,23 +6,38 @@
             <h3 class="text-center py-3">Re-Addmision</h3>
             <div class="mb-3">
                 <label for="exampleInputNumber1" class="form-label">Application Number</label>
-                <input type="number" class="form-control" id="exampleInputEmail1" name="Application_no">
+                <input type="number" class="form-control" id="Application_Number" name="Application_no">
                 <div id="emailHelp" class="form-text">We'll never share your Application Number with anyone else.</div>
             </div>
             <div class="mb-3">
                 <label for="exampleInputNumber1" class="form-label">Form Number</label>
-                <input type="number" class="form-control" id="exampleInputNumber1" name="Form_no">
+                <input type="number" class="form-control" id="Form_Number" name="Form_no">
             </div>
             <div class="mb-3">
                 <label for="exampleInputName1" class="form-label">Student First Name</label>
-                <input type="text" class="form-control" id="exampleInputName1" name="First_Name">
+                <input type="text" class="form-control" id="Student_First_Name" name="First_Name">
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" id="Re_addmission_find_data_SumbitBtn">Submit</button>
         </form>
 
     </div>
+    <script>
+        const checkInputfield = setInterval(() => {
+            let Application_Number = document.getElementById("Application_Number").value == ''
+            let Form_Number = document.getElementById("Form_Number").value == ''
+            let Student_First_Name = document.getElementById("Student_First_Name").value == ''
+            if (Application_Number || Form_Number || Student_First_Name) {
+                document.getElementById("Re_addmission_find_data_SumbitBtn").classList.add("disabled");
+            } else {
+                document.getElementById("Re_addmission_find_data_SumbitBtn").classList.remove("disabled");
+            }
+        }, 50);
+        document.getElementById("Re_addmission_find_data_SumbitBtn").addEventListener('click', () => {
+            document.getElementById("Re_addmission_find_data_SumbitBtn").classList.add("disabled");
 
+        })  
+    </script>
 
 
 
