@@ -43,16 +43,20 @@
       </div>
       <div class="container w-50 overflow-auto Query">
         <h2 class="bg-secondary rounded-4 sticky-top text-center w-100 ">Query</h2>
-        
+
         <%data!=null?data.forEach(element=> { %>
           <a class="list-group-item list-group-item-action rounded-3 shadow-lg p-3 mb-3 bg-body " aria-current="true">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">
                 <%=element.Username %>
               </h5>
-              <small>
+              <small id="<%=element._id%>">
                 <%=element.Date%>
               </small>
+              <!-- slice date in javaScript -->
+              <script>
+                document.getElementById("<%=element._id%>").innerText = "<%=element.Date%>".slice(0, 16);
+              </script>
             </div>
             <p class="mb-1">
               <%= element.Description %>
@@ -95,19 +99,19 @@
         crossorigin="anonymous"></script>
       <script>
 
-        document.getElementById('toast_close_btn').addEventListener('click', () => {
-          document.getElementById('Toast_div').classList.remove('d-block');
-
-        });
-        let btn_value = document.getElementById('Toast_div').classList;
-        if (btn_value[5] == 'd-block') {
-          const collaps_btn = setInterval(() => {
+        if (document.getElementById('toast_close_btn') != null) {
+          document.getElementById('toast_close_btn').addEventListener('click', () => {
             document.getElementById('Toast_div').classList.remove('d-block');
-          }, 5000);
-        } else {
-          clearInterval(collaps_btn);
+          });
+          let btn_value = document.getElementById('Toast_div').classList;
+          if (btn_value[5] == 'd-block') {
+            const collaps_btn = setInterval(() => {
+              document.getElementById('Toast_div').classList.remove('d-block');
+            }, 3000);
+          } else {
+            clearInterval(collaps_btn);
+          }
         }
-
 
 
       </script>
