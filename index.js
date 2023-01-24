@@ -162,6 +162,7 @@ app.get("/ISL", encoded, middleware.validation, async (req, res, next) => {
   });
 });
 app.get("/About", async (req, res) => {
+console.log(req.url);
   res.render("About-Us");
 });
 app.get("/Gallary", async (req, res) => {
@@ -181,7 +182,7 @@ app.post(
   encoded,
   upload,
   middleware.validation,
-  (req, res) => {
+  async (req, res) => {
     var n = Math.floor(Math.random() * 1000000000);
     var Form_number = Math.floor(Math.random() * 1234);
 
@@ -220,7 +221,7 @@ app.post(
         },
       },
     });
-    User.save()
+   await User.save()
       .then((data) => {
         res.cookie("form_id", `${data._id}`);
         res.render("submitNewadmission", { data: data });
@@ -228,6 +229,7 @@ app.post(
       .catch((err) => {
         console.log(err);
       });
+
   }
 );
 
@@ -320,11 +322,10 @@ app.get(
   "/pdf_generate/:_id",
   encoded,
   middleware.validation,
-  async (req, res) => {
+  async (req, res,next) => {
     const _id = req.params._id;
-
     await User_Data.findOne({ _id: _id })
-      .then((data) => {
+      .then( async (data) => {
         const user = {
           data: data,
         };
@@ -339,9 +340,9 @@ app.get(
           format: "Letter",
         };
 
-        pdf
+       await pdf
           .create(ejs_data, option)
-          .toFile(`user${_id}.pdf`, (err, response) => {
+          .toFile(`user${_id}.pdf`, async (err, response) => {
             if (err) {
               console.log(err);
             } else {
@@ -354,13 +355,14 @@ app.get(
                   console.log(err);
                   return res.status(500).send("Sorry for this problem");
                 } else {
-                  res.setHeader("Content-Type", "application/pdf");
-                  res.setHeader(
+                 await res.setHeader("Content-Type", "application/pdf");
+                 await res.setHeader(
                     "Content-Disposition",
                     "attachment;filename=" + user_filename
                   );
 
                   await res.send(file);
+          
                 }
               });
             }
@@ -369,6 +371,7 @@ app.get(
       .catch((err) => {
         console.log(err);
       });
+      
   }
 );
 
