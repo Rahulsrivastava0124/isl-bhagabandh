@@ -362,7 +362,6 @@ app.get(
                   );
 
                   await res.send(file);
-          
                 }
               });
             }
